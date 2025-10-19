@@ -1,4 +1,4 @@
-// Canvas Animation - Stock Market Chart Effect
+// Canvas Animation - Subtle Background Effect
 const canvas = document.getElementById('canvas3d');
 const ctx = canvas.getContext('2d');
 
@@ -9,7 +9,7 @@ function resizeCanvas() {
 
 resizeCanvas();
 
-// Chart Line Particle System
+// Subtle Background Particle System (Non-interfering)
 class ChartParticle {
     constructor() {
         this.reset();
@@ -18,50 +18,11 @@ class ChartParticle {
     reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.8;
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.size = Math.random() * 2.5 + 1;
-        this.isGreen = Math.random() > 0.5;
-    }
-    
-    update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-    }
-    
-    draw() {
-        const isLightMode = document.body.classList.contains('light-mode');
-        const color = this.isGreen 
-            ? (isLightMode ? 'rgba(67, 160, 71, 0.4)' : 'rgba(0, 230, 118, 0.6)')
-            : (isLightMode ? 'rgba(229, 57, 53, 0.4)' : 'rgba(255, 82, 82, 0.6)');
-        
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
-
-// Candlestick shapes
-class Candlestick {
-    constructor() {
-        this.reset();
-    }
-    
-    reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.width = 4;
-        this.height = Math.random() * 30 + 10;
-        this.wickTop = Math.random() * 10;
-        this.wickBottom = Math.random() * 10;
-        this.isGreen = Math.random() > 0.5;
         this.vx = (Math.random() - 0.5) * 0.3;
         this.vy = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.3 + 0.1;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.isGreen = Math.random() > 0.5;
+        this.opacity = Math.random() * 0.15 + 0.05;
     }
     
     update() {
@@ -78,96 +39,24 @@ class Candlestick {
             ? (isLightMode ? `rgba(67, 160, 71, ${this.opacity})` : `rgba(0, 230, 118, ${this.opacity})`)
             : (isLightMode ? `rgba(229, 57, 53, ${this.opacity})` : `rgba(255, 82, 82, ${this.opacity})`);
         
-        ctx.strokeStyle = color;
         ctx.fillStyle = color;
-        ctx.lineWidth = 1;
-        
-        // Draw wick
         ctx.beginPath();
-        ctx.moveTo(this.x + this.width / 2, this.y - this.wickTop);
-        ctx.lineTo(this.x + this.width / 2, this.y + this.height + this.wickBottom);
-        ctx.stroke();
-        
-        // Draw body
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
     }
 }
 
-// Grid lines effect
-class GridLine {
-    constructor() {
-        this.reset();
-    }
-    
-    reset() {
-        this.horizontal = Math.random() > 0.5;
-        if (this.horizontal) {
-            this.x1 = 0;
-            this.x2 = canvas.width;
-            this.y1 = this.y2 = Math.random() * canvas.height;
-        } else {
-            this.y1 = 0;
-            this.y2 = canvas.height;
-            this.x1 = this.x2 = Math.random() * canvas.width;
-        }
-        this.opacity = Math.random() * 0.1 + 0.05;
-    }
-    
-    draw() {
-        const isLightMode = document.body.classList.contains('light-mode');
-        ctx.strokeStyle = isLightMode 
-            ? `rgba(2, 136, 209, ${this.opacity})` 
-            : `rgba(0, 212, 255, ${this.opacity})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(this.x1, this.y1);
-        ctx.lineTo(this.x2, this.y2);
-        ctx.stroke();
-    }
-}
-
-const particles = Array.from({ length: 60 }, () => new ChartParticle());
-const candlesticks = Array.from({ length: 15 }, () => new Candlestick());
-const gridLines = Array.from({ length: 8 }, () => new GridLine());
+const particles = Array.from({ length: 40 }, () => new ChartParticle());
 
 function animate() {
     const isLightMode = document.body.classList.contains('light-mode');
-    ctx.fillStyle = isLightMode ? 'rgba(245, 247, 250, 0.1)' : 'rgba(10, 14, 39, 0.08)';
+    ctx.fillStyle = isLightMode ? 'rgba(245, 247, 250, 0.15)' : 'rgba(10, 14, 39, 0.15)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Draw grid lines
-    gridLines.forEach(line => line.draw());
-    
-    // Draw and update candlesticks
-    candlesticks.forEach(stick => {
-        stick.update();
-        stick.draw();
-    });
-    
-    // Draw and update particles
+    // Draw and update particles only
     particles.forEach(p => {
         p.update();
         p.draw();
-    });
-    
-    // Draw connecting lines between nearby particles
-    particles.forEach((p1, i) => {
-        particles.slice(i + 1).forEach(p2 => {
-            const dx = p1.x - p2.x;
-            const dy = p1.y - p2.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            
-            if (dist < 150) {
-                ctx.strokeStyle = p1.isGreen 
-                    ? (isLightMode ? `rgba(67, 160, 71, ${0.2 * (1 - dist / 150)})` : `rgba(0, 230, 118, ${0.3 * (1 - dist / 150)})`)
-                    : (isLightMode ? `rgba(229, 57, 53, ${0.2 * (1 - dist / 150)})` : `rgba(255, 82, 82, ${0.3 * (1 - dist / 150)})`);
-                ctx.lineWidth = 0.5;
-                ctx.beginPath();
-                ctx.moveTo(p1.x, p1.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.stroke();
-            }
-        });
     });
     
     requestAnimationFrame(animate);
@@ -175,42 +64,31 @@ function animate() {
 
 animate();
 
-// Window Resize Handler
 window.addEventListener('resize', () => {
     resizeCanvas();
     particles.forEach(p => p.reset());
-    candlesticks.forEach(c => c.reset());
-    gridLines.forEach(g => g.reset());
 });
 
 // Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
 const toggleIcon = themeToggle.querySelector('.toggle-icon');
 
-// Check for saved theme preference or default to 'dark'
-const currentTheme = document.body.dataset.theme || 'dark';
-if (currentTheme === 'light') {
-    document.body.classList.add('light-mode');
-    toggleIcon.textContent = '☀️';
-}
-
 themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('light-mode');
     
     if (document.body.classList.contains('light-mode')) {
         toggleIcon.textContent = '☀️';
-        document.body.dataset.theme = 'light';
         showNotification('Light mode activated! ☀️');
     } else {
         toggleIcon.textContent = '🌙';
-        document.body.dataset.theme = 'dark';
         showNotification('Dark mode activated! 🌙');
     }
 });
 
-// Navigation
+// Navigation with improved dropdown handling
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
+const dropdowns = document.querySelectorAll('.dropdown');
 
 if (navToggle && navMenu) {
     navToggle.addEventListener('click', (e) => {
@@ -220,6 +98,27 @@ if (navToggle && navMenu) {
     });
 }
 
+// Dropdown Toggle for Mobile
+dropdowns.forEach(dropdown => {
+    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+    
+    if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isThisActive = dropdown.classList.contains('active');
+                dropdowns.forEach(d => d.classList.remove('active'));
+                
+                if (!isThisActive) {
+                    dropdown.classList.add('active');
+                }
+            }
+        });
+    }
+});
+
 // Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -227,12 +126,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         if (href === '#') return;
         
+        if (this.classList.contains('dropdown-toggle') && window.innerWidth <= 768) {
+            return;
+        }
+        
         e.preventDefault();
         const target = document.querySelector(href);
         if (target) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             if (navMenu) navMenu.classList.remove('active');
             if (navToggle) navToggle.classList.remove('active');
+            dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
         }
     });
 });
@@ -243,15 +147,17 @@ document.addEventListener('click', (e) => {
         if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
+            dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
         }
     }
 });
 
-// Handle menu on window resize
+// Handle dropdown on window resize
 window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
         if (navMenu) navMenu.classList.remove('active');
         if (navToggle) navToggle.classList.remove('active');
+        dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
     }
 });
 
@@ -287,7 +193,6 @@ document.querySelectorAll('.poster-btn').forEach(btn => {
 
 // Notification Function
 function showNotification(message) {
-    // Remove existing notification if any
     const existingNotification = document.querySelector('.notification');
     if (existingNotification) {
         existingNotification.remove();
@@ -462,21 +367,46 @@ if (!welcomeShown) {
     }, 1000);
 }
 
-// Navbar background on scroll
+// Floating stats animation
+const prizeAmount = document.querySelector('.prize-amount');
+if (prizeAmount) {
+    let scale = 1;
+    let growing = true;
+    setInterval(() => {
+        if (growing) {
+            scale += 0.002;
+            if (scale >= 1.05) growing = false;
+        } else {
+            scale -= 0.002;
+            if (scale <= 1) growing = true;
+        }
+        prizeAmount.style.transform = `scale(${scale})`;
+    }, 50);
+}
+
+// Optimized navbar scroll with throttling
 let lastScroll = 0;
+let ticking = false;
+
 window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 50) {
-        navbar.style.padding = '15px 40px';
-        navbar.style.boxShadow = '0 5px 30px rgba(0, 212, 255, 0.3)';
-    } else {
-        navbar.style.padding = '20px 40px';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 212, 255, 0.4)';
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const navbar = document.querySelector('.navbar');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navbar.style.padding = '15px 40px';
+                navbar.style.boxShadow = '0 5px 30px rgba(0, 212, 255, 0.3)';
+            } else {
+                navbar.style.padding = '20px 40px';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 212, 255, 0.4)';
+            }
+            
+            lastScroll = currentScroll;
+            ticking = false;
+        });
+        ticking = true;
     }
-    
-    lastScroll = currentScroll;
 }, { passive: true });
 
 // Counter animation for numbers
@@ -508,7 +438,6 @@ const counterObserver = new IntersectionObserver((entries) => {
     threshold: 0.5
 });
 
-// Add any counter elements if needed
 document.querySelectorAll('[data-target]').forEach(counter => {
     counterObserver.observe(counter);
 });
