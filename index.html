@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARQ 2026 - Integration Fest</title>
+    <style>
+        /* CSS will be in separate artifact */
+    </style>
+</head>
+<body>
+    <canvas id="canvas3d"></canvas>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <div class="toggle-icon">🌙</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">Integration Fest</div>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#tech" class="nav-link dropdown-toggle">Tech ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/sparq/" class="dropdown-link">SPARQ</a></li>
+                        <li><a href="/mtrp/" class="dropdown-link">MTRP</a></li>
+                        <li><a href="/intbee/" class="dropdown-link">Integration Bee</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/cultural/" class="nav-link">Cultural</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/sports/" class="nav-link">Sports</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/gallery/" class="nav-link">Gallery</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#footer" class="nav-link dropdown-toggle">About ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#venue" class="dropdown-link">Venue</a></li>
+                        <li><a href="#sponsors" class="dropdown-link">Sponsors</a></li>
+                        <li><a href="#contact" class="dropdown-link">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="hero-super">Integration 2026 Presents</p>
+            <h1 class="hero-title">SPARQ</h1>
+            <p class="hero-subtitle">Statistical and Probabilistic Analysis of Real-life Quant</p>
+            <p class="hero-tagline">Unleash Your Curiosity - Turn Curiosity into Discovery</p>
+            <div class="hero-prize">
+                <div class="prize-badge">
+                    <span class="prize-label">Prize Pool</span>
+                    <span class="prize-amount">₹20,000</span>
+                </div>
+                <div class="prize-highlight">
+                    Winners get a chance to attend a workshop by <strong>CAIML</strong><br>
+                    <span class="prize-sub">(Prominent ML Lab at ISI Kolkata)</span>
+                </div>
+            </div>
+            <a href="#register" class="btn-hero">Register Now</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="page-section">
+        <div class="section-content">
+            <h2 class="section-title">About SPARQ</h2>
+            <div class="about-card">
+                <p class="about-text">
+                    If crunching numbers and probability puzzles sound like something that floats your boat, this event is for you! 
+                    Put your skills in data analysis, coding and quantitative trading to the test in this thrilling competition.
+                </p>
+                <p class="about-text">
+                    SPARQ is a cutting-edge technical event under the INTEGRATION banner of Indian Statistical Institute, Kolkata. 
+                    With a focus on statistics, probability, analysis, and quantitative research, SPARQ aims to ignite curiosity 
+                    and foster data-driven problem-solving.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Poster Section -->
+    <section class="page-section alt-bg">
+        <div class="section-content">
+            <h2 class="section-title">Event Poster</h2>
+            <div class="poster-placeholder">
+                <div class="poster-icon">📊</div>
+                <p class="poster-text">Poster Coming Soon</p>
+            </div>
+            <div class="poster-container">
+                <a href="#" class="btn poster-btn">View Poster</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="page-section">
+        <div class="section-content">
+            <h2 class="section-title">Event Categories</h2>
+            
+            <!-- SPARQ Junior -->
+            <div class="event-card">
+                <div class="event-header">
+                    <div class="event-icon">📈</div>
+                    <h3 class="event-title">SPARQ JUNIOR</h3>
+                </div>
+                <div class="event-badge">For 10+2 Students with Math Background</div>
+                
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Date:</span>
+                        <span class="detail-value">January 3, 2026</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span class="detail-value">Online, Screen Proctored</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Format:</span>
+                        <span class="detail-value">MCQs & Integer-type Questions</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Registration Fee:</span>
+                        <span class="detail-value">₹200</span>
+                    </div>
+                </div>
+
+                <div class="syllabus-box">
+                    <h4 class="syllabus-title">Syllabus (For 10+2)</h4>
+                    <ul class="syllabus-list">
+                        <li>Mathematics: Based on MCQ questions</li>
+                        <li>Probability: Based on MCQ questions</li>
+                    </ul>
+                </div>
+
+                <div class="rewards-box">
+                    <p>✨ Top 10% selected for exclusive talk by CAIML professors</p>
+                    <p>💰 Attractive cash prizes</p>
+                </div>
+            </div>
+
+            <!-- SPARQ Senior Round 1 -->
+            <div class="event-card">
+                <div class="event-header">
+                    <div class="event-icon">📊</div>
+                    <h3 class="event-title">SPARQ SENIOR - Round 1</h3>
+                </div>
+                <div class="event-badge">For Undergraduates</div>
+                
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Date:</span>
+                        <span class="detail-value">January 4, 2026</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span class="detail-value">Online, Screen Proctored</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Format:</span>
+                        <span class="detail-value">MCQs & ICPC-style Problems</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Registration Fee:</span>
+                        <span class="detail-value">₹300</span>
+                    </div>
+                </div>
+
+                <div class="syllabus-box">
+                    <h4 class="syllabus-title">Syllabus (For UG)</h4>
+                    <ul class="syllabus-list">
+                        <li>Statistics</li>
+                        <li>Probability</li>
+                        <li>Mathematics</li>
+                        <li>Based on MCQ questions</li>
+                    </ul>
+                </div>
+
+                <div class="rewards-box">
+                    <p>✨ Top 40% advance to Round 2</p>
+                </div>
+            </div>
+
+            <!-- SPARQ Senior Round 2 -->
+            <div class="event-card">
+                <div class="event-header">
+                    <div class="event-icon">💹</div>
+                    <h3 class="event-title">SPARQ SENIOR - Round 2</h3>
+                </div>
+                <div class="event-badge">For Top 40% from Round 1</div>
+                
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Duration:</span>
+                        <span class="detail-value">January 7-14, 2026</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span class="detail-value">Online, Screen Proctored</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Format:</span>
+                        <span class="detail-value">Week-long Data Challenge</span>
+                    </div>
+                </div>
+
+                <div class="syllabus-box">
+                    <h4 class="syllabus-title">Challenge Description</h4>
+                    <p class="challenge-desc">
+                        A hands-on challenge where data science meets quantitative finance. Solve a real-world prediction 
+                        problem using a unique financial dataset. Apply data science techniques and quantitative analysis 
+                        to build the best predictive model, with rankings updated continuously on a live leaderboard.
+                    </p>
+                </div>
+
+                <div class="rewards-box">
+                    <p>✨ Top 15% selected for exclusive talk by CAIML professors</p>
+                    <p>💰 Attractive cash prizes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Dates Section -->
+    <section id="dates" class="page-section alt-bg">
+        <div class="section-content">
+            <h2 class="section-title">Key Dates</h2>
+            <div class="dates-grid">
+                <div class="date-card">
+                    <div class="date-icon">📅</div>
+                    <h3 class="date-title">Registration Starts</h3>
+                    <p class="date-value coming-soon">Coming Soon</p>
+                </div>
+                <div class="date-card">
+                    <div class="date-icon">⏰</div>
+                    <h3 class="date-title">Registration Ends</h3>
+                    <p class="date-value coming-soon">Coming Soon</p>
+                </div>
+                <div class="date-card">
+                    <div class="date-icon">🎫</div>
+                    <h3 class="date-title">Admit Cards Release</h3>
+                    <p class="date-value coming-soon">Coming Soon</p>
+                </div>
+                <div class="date-card highlight">
+                    <div class="date-icon">🚀</div>
+                    <h3 class="date-title">Exam Date</h3>
+                    <p class="date-value">January 4, 2026</p>
+                </div>
+                <div class="date-card">
+                    <div class="date-icon">🏆</div>
+                    <h3 class="date-title">Results Announcement</h3>
+                    <p class="date-value coming-soon">Coming Soon</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="page-section">
+        <div class="section-content">
+            <h2 class="section-title">Register for SPARQ</h2>
+            <div class="registration-box">
+                <h3 class="registration-title">Registration Portal</h3>
+                
+                <!-- Google Form Embed Space -->
+                <div class="form-container">
+                    <div class="form-placeholder">
+                        <div class="form-icon">📝</div>
+                        <p class="form-text">Registration Form</p>
+                        <p class="coming-soon">Coming Soon</p>
+                        <!-- Replace the content below with your Google Form embed code -->
+                        <!-- <iframe src="YOUR_GOOGLE_FORM_LINK" width="100%" height="600" frameborder="0"></iframe> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Integration Fest 2026</div>
+            <p class="footer-text">Indian Statistical Institute, Kolkata</p>
+            <div class="footer-contact">
+                <p class="contact-item">📧 arnabpalit.integration@gmail.com</p>
+                <p class="contact-item">📞 +91 9162897 49608</p>
+            </div>
+            <p class="footer-copyright">© 2026 Indian Statistical Institute. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
